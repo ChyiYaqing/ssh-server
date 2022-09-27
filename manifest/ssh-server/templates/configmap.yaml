@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ssh-server.fullname" . }}
+  labels:
+    {{- include "ssh-server.labels" . | nindent 4 }}
+data:
+  sshd_config: |
+    PasswordAuthentication no
+    ChallengeResponseAuthentication no
+    UsePAM no
+  authorized_keys: |
+    {{ .Values.authorized_keys }}
