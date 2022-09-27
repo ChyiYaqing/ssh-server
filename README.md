@@ -1,5 +1,9 @@
 # SSH Server
-> Docker Image for running OpenSSH server. Can be used in combination with sshuttle for creating a secure network connection to a docker cluster
+> Using SSH into a Kubernetes Pod From Outside the Cluster. for debug pods
+
+Secure Socket Shell (SSH) is a UNIX-based protocol that is used to access a remote machine or a virtual machine (VM)
+
+Pod, by defunition, is analogous to VM as it allows the containers to behave as if they are running on isolated VMs.
 
 ![](./misc/ssh-server.gif)
 
@@ -32,4 +36,11 @@ make helm_delete
 
 # 本机ssh连接到pod, 端口使用NodePort端口, IP使用集群Node IP
 ssh -o 'PubkeyAcceptedKeyTypes +ssh-rsa' -i ~/.ssh/id_rsa -p 31181 root@192.168.50.57
+```
+
+### FAQ
+```
+Q1. SSH handshake is rejected with 'no mutual signature algorithmh' error
+  > A: offer the RSA algorithm to the server.
+  > ssh -o 'PubkeyAcceptedKeyTypes +ssh-rsa' root@:127.0.0.1
 ```
